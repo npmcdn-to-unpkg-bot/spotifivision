@@ -1,0 +1,23 @@
+{
+  "name": "spotifivision",
+  "description": "",
+  "main": "bower.json",
+  "authors": [
+    "jessonfoo <jessonfoo@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/albeaudin/spotifivision",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "masonry": "desandro/masonry#^4.1.0",
+    "jquery": "^3.1.0",
+    "three.js": "threejs#*"
+  }
+}
