@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var jade = require('gulp-jade');
 var rename = require('gulp-rename');
 var webserver = require('gulp-webserver');
+var nodemon= require('gulp-nodemon');
 
 // Lint Task
 gulp.task('lint', function() {
@@ -50,15 +51,23 @@ gulp.task('watch', function() {
 //     }))
 //     .pipe(gulp.dest('./dist/'))
 // });
+gulp.task('start', function () {
+  nodemon({
+    script: './bin/www'
+  , ext: 'js html'
+  , env: { 'NODE_ENV': 'development' },
+  open: true
+  })
+})
 
  
-gulp.task('webserver', function() {
-  gulp.src('app')
-    .pipe(webserver({
-      livereload: true,
-      directoryListing: true,
-      open: true
-    }));
-});
+// gulp.task('webserver', function() {
+//   gulp.src('app')
+//     .pipe(webserver({
+//       livereload: true,
+//       directoryListing: true,
+//       open: true
+//     }));
+// });
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch','webserver']);
+gulp.task('default', ['lint', 'sass', 'scripts', 'watch','start']);

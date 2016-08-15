@@ -1,4 +1,5 @@
-res.render('index', { title: 'Express' });
+
+var express = require('express');
 
 function get (req, res, next) {
   res.render('index', { title: 'Express' });
