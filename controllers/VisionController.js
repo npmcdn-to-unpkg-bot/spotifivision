@@ -3,39 +3,39 @@ var express = require('express');
 
 function get (req, res, next) {
   res.render('index', { title: 'Express' });
-  // model.findOne({ _id: req.params.id }, function (err, model) {
+  // User.findOne({ _id: req.params.id }, function (err, user) {
   //   if (err) console.log(err)
-  //   res.json(model)
+  //   res.json(user)
   // })
 }
 
 function index (req, res, next) {
   res.render('index', { title: 'Express' });
-  // model.findOne({ _id: req.params.id }, function (err, model) {
+  // User.findOne({ _id: req.params.id }, function (err, user) {
   //   if (err) console.log(err)
-  //   res.json(model)
+  //   res.json(user)
   // })
 }
 
 function create (req, res, next) {
   res.render('index', { title: 'Express' });
-  // model.create(model, function(err, model){
+  // User.create(user, function(err, user){
   //   if (err) console.log(err)
-  //   res.json(model)
+  //   res.json(user)
   // })
 }
 
 function update (req, res, next) {
   res.render('index', { title: 'Express' });
-  // model.findOneAndUpdate({_id: req.params.id}, model, function(err, model){
+  // User.findOneAndUpdate({_id: req.params.id}, user, function(err, user){
   //   if (err) console.log(err)
-  //   res.json(model)
+  //   res.json(user)
   // })
 }
 
 function destroy (req, res, next) {
   res.render('index', { title: 'Express' });
-  // model.findOneAndUpdate({_id: req.params.id}, model, function(err){
+  // User.findOneAndUpdate({_id: req.params.id}, user, function(err){
   //   if (err) console.log(err)
   //   res.json({ msg: "DELETED!"})
   // })
