@@ -6,6 +6,7 @@ var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var jade = require('gulp-jade');
 var rename = require('gulp-rename');
 var webserver = require('gulp-webserver');
 
@@ -38,6 +39,17 @@ gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
     gulp.watch('scss/*.scss', ['sass']);
 });
+
+ 
+// gulp.task('templates', function() {
+//   var YOUR_LOCALS = {'views': '/views'};
+ 
+//   gulp.src('./lib/*.jade')
+//     .pipe(jade({
+//       locals: YOUR_LOCALS
+//     }))
+//     .pipe(gulp.dest('./dist/'))
+// });
 
  
 gulp.task('webserver', function() {
