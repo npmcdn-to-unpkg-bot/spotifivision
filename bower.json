@@ -2,14 +2,17 @@
   "name": "spotifivision",
   "description": "",
   "main": "/public/",
-  "authors": "jessonfoo <jessonfoo@gmail.com>" ,
+  "authors": [
+    "jessonfoo <jessonfoo@gmail.com>"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/albeaudin/spotifivision",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test"
+    "test",
+    "tests"
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",

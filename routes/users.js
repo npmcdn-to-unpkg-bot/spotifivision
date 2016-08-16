@@ -1,4 +1,5 @@
 var express = require('express');
+<<<<<<< HEAD
 var router = express.Router();
 var passport = require('passport');
 
@@ -23,3 +24,13 @@ router.get('/auth/flickr/callback',
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+=======
+var auth = express.Router();
+var AuthController = require('../controllers/AuthController')
+/* GET users listing. */
+auth.get('/', AuthController.get);
+auth.get('/login', AuthController.login);
+auth.get('/callback', AuthController.getCallBack);
+auth.get('/refresh_token', AuthController.refreshToken);
+module.exports = auth;
+>>>>>>> 88080cf5118f3e24c1b3bc2c3b34be9ba6852ff2
