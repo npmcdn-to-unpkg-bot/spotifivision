@@ -1,4 +1,4 @@
-(function() {
+$(function() {
   function getHashParams() {
     var hashParams = {};
     var e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -8,6 +8,8 @@
     }
     return hashParams;
   }
+
+  function getAccessToken() {return document.cookie.split('=')[1]; };
 
   var userProfileSource = document.getElementById('user-profile-template').innerHTML,
   userProfileTemplate = Handlebars.compile(userProfileSource),
@@ -22,7 +24,7 @@
 
   var params = getHashParams();
 
-  var access_token = params.access_token,
+  // var getAccessToken() = params.getAccessToken(),
   refresh_token = params.refresh_token,
   error = params.error;
 
@@ -30,7 +32,7 @@
 
   }
   var playlistData = function(json) {
-    var data
+    var data;
     data["items"].map(p => {
       var playlistName = p["name"];
       var imagesArray = p["images"];
@@ -44,33 +46,34 @@
   if (error) {
     alert('There was an error during the authentication');
   } else {
-    if (access_token) {
+    if (getAccessToken()) {
     // render oauth info
     oauthPlaceholder.innerHTML = oauthTemplate({
-      access_token: access_token,
+      access_token: getAccessToken(),
       refresh_token: refresh_token
     });
+
     $.ajax({
       url: 'https://api.spotify.com/v1/me/playlists',
       headers: {
-        'Authorization': 'Bearer ' + access_token
+        'Authorization': 'Bearer ' +getAccessToken() 
       },
-      success: function(response) {
-        console.log("Playlist Names" + response.items.map(n => {
+      success: function(playRes) {
+        console.log("Playlist Names" + playRes.items.map(n => {
           return n.name
         }));
-                        // userPlaylistSource.innerHTML=response;
+        userPlaylistSource.innerHTML=playRes;
 
-                        userPlaylistsPlaceholder.innerHTML = userPlaylistTemplate(response.items[0]);
-                      }
-                    });
+        userPlaylistsPlaceholder.innerHTML = userPlaylistTemplate(playRes.items[0]);
+      }
+    });
     $.ajax({
       url: 'https://api.spotify.com/v1/me',
       headers: {
-        'Authorization': 'Bearer ' + access_token
+        'Authorization': 'Bearer ' + getAccessToken() 
       },
-      success: function(response) {
-        userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+      success: function(bearRes) {
+        userProfilePlaceholder.innerHTML = userProfileTemplate(bearRes);
 
         $('#login').hide();
         $('#loggedin').show();
@@ -90,9 +93,9 @@
         'refresh_token': refresh_token
       }
     }).done(function(data) {
-      access_token = data.access_token;
+      getAccessToken() = data.getAccessToken();
       oauthPlaceholder.innerHTML = oauthTemplate({
-        access_token: access_token,
+        access_token: getAccessToken(),
         refresh_token: refresh_token
       });
     });

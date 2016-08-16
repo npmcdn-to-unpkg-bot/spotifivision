@@ -11,18 +11,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser= require('body-parser');
 var db = mongoose.connection;
 
-var redirect_uri = 'http://localhost:3000/callback'; // redirect uri
-
-var generateRandomString = function(length) {
-  var text = '';
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
-
 
 mongoose.connect('mongodb://localhost/spotifivision');
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -60,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', routes);
+app.use('/', routes);
 
 app.get('/login', function(req, res) {
 
@@ -87,59 +75,36 @@ app.get('/callback', function(req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
+  // if (state === null || state !== storedState) {
+    // res.redirect('/auth/?' +
+    //   querystring.stringify({
+    //     error: 'state_mismatch'
+    //   });
+    //   );
+  // } else {
+  res.clearCookie(stateKey);
+  var authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    form: {
+      code: code,
+      redirect_uri: process.env.REDIRECT_URI,
+      grant_type: 'authorization_code'
+    },
+    headers: {
+      'Authorization': 'Basic ' + (new Buffer(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64'))
+    },
+    json: true
+  };
 
-  if (state === null || state !== storedState) {
-    res.redirect('/#' +
-      querystring.stringify({
-        error: 'state_mismatch'
-      }));
-  } else {
-    res.clearCookie(stateKey);
-    var authOptions = {
-      url: 'https://accounts.spotify.com/api/token',
-      form: {
-        code: code,
-        redirect_uri: process.env.REDIRECT_URI,
-        grant_type: 'authorization_code'
-      },
-      headers: {
-        'Authorization': 'Basic ' + (new Buffer(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64'))
-      },
-      json: true
-    };
-
-    request.post(authOptions, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-
-        var access_token = body.access_token,
-            refresh_token = body.refresh_token;
-
-        var options = {
-          url: 'https://api.spotify.com/v1/me',
-          headers: { 'Authorization': 'Bearer ' + access_token },
-          json: true
-        };
-
-        // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-          console.log(body);
-        });
-
-        // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
-      } else {
-        res.redirect('/#' +
-          querystring.stringify({
-            error: 'invalid_token'
-          }));
-      }
-    });
-  }
+  request.post(authOptions, function(error, response, body) {
+    if (error) { console.log(error); res.json(error) }
+    console.log(body)
+    // what should we do with the access token?
+    res.cookie('access_token', body.access_token);
+    res.redirect('/')
+  })
 });
+
 
 app.get('/refresh_token', function(req, res) {
 
@@ -160,9 +125,9 @@ app.get('/refresh_token', function(req, res) {
       var access_token = body.access_token;
       res.send({
         'access_token': access_token
-      });
+      })
     }
-  });
+  })
 });
 
 
@@ -173,31 +138,37 @@ app.get('/refresh_token', function(req, res) {
 //   // we're connected!
 // });
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.use(function(err,req, res, next) {
+//   if(err){
+//     var error = new Error('Not Found');
+//     error.status = 404;
+//     next(error);
+//   }
+// });
 
 
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
+// if (app.get('env') === 'development') {
+//   app.use(function(err, req, res, next) {
+//     if(err){
+//       res.status(err.status || 500);
+//       res.render('error', {
+//         message: err.message,
+//         error: err
+//       });
+//     }
+//   });
+// }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  if(err){
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
+  }
 });
 
 

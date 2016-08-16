@@ -2,7 +2,11 @@
 var express = require('express');
 
 function get (req, res, next) {
-  res.render('index', { title: 'Express' });
+  // res.send(res.body);
+  // res.render('home', { title: 'Express', response: res});
+  res.render('index', { title: 'Express'});
+  // res.json(res);
+  // res.render('index', { title: 'Express'});
   // model.findOne({ _id: req.params.id }, function (err, model) {
   //   if (err) console.log(err)
   //   res.json(model)
@@ -10,7 +14,9 @@ function get (req, res, next) {
 }
 
 function index (req, res, next) {
-  res.render('index', { title: 'Express' });
+  // res.send(res.body);
+  res.render('index', { title: 'Express'});
+  // res.send(res);
   // model.findOne({ _id: req.params.id }, function (err, model) {
   //   if (err) console.log(err)
   //   res.json(model)
