@@ -1,5 +1,13 @@
 function getAccessToken() {
-  return document.cookie.split('=')[1];
+  var entries = document.cookie.split(';')
+  var token = false
+  entries.forEach(function (entry) {
+    var pieces = entry.trim().split('=')
+    if (pieces[0] === 'access_token') {
+      token = pieces[1]
+    }
+  })
+  return token
 }
 
 $.ajax({
