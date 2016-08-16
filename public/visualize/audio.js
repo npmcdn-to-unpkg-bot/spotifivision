@@ -1,4 +1,6 @@
-var context;
+(function(){
+
+	var context;
 var source, sourceJs;
 var analyser;
 var url = '';
@@ -117,4 +119,5 @@ $(window).resize(function() {
 			$('#play_link').css('left', ($(window).width() / 2 - $('#play_link').width() / 2) + 'px');
 		}
 	}
+});
 });
