@@ -10,7 +10,13 @@ var jade = require('gulp-jade');
 var rename = require('gulp-rename');
 var webserver = require('gulp-webserver');
 var nodemon= require('gulp-nodemon');
+var vendor = require('gulp-concat-vendor');
 
+gulp.task('v-scripts', function() {
+    gulp.src('./scripts/vendor/*')
+        .pipe(vendor('vendor.js'))
+        .pipe(gulp.dest('./dist/scripts'));  
+});
 // Lint Task
 gulp.task('lint', function() {
     return gulp.src('js/*.js')
@@ -42,15 +48,15 @@ gulp.task('watch', function() {
 });
 
  
-// gulp.task('templates', function() {
-//   var YOUR_LOCALS = {'views': '/views'};
+gulp.task('templates', function() {
+  var YOUR_LOCALS = {'views': '/views'};
  
-//   gulp.src('./lib/*.jade')
-//     .pipe(jade({
-//       locals: YOUR_LOCALS
-//     }))
-//     .pipe(gulp.dest('./dist/'))
-// });
+  gulp.src('./lib/*.jade')
+    .pipe(jade({
+      locals: YOUR_LOCALS
+    }))
+    .pipe(gulp.dest('./dist/'))
+});
 gulp.task('start', function () {
   nodemon({
     script: './bin/www'
@@ -70,4 +76,4 @@ gulp.task('start', function () {
 //     }));
 // });
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch','start']);
+gulp.task('default', ['lint', 'sass','templates','scripts','v-scripts', 'watch','start']);

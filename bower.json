@@ -1,15 +1,9 @@
 {
   "name": "spotifivision",
   "description": "",
-<<<<<<< Updated upstream
-  "main": "bower.json",
+  "main": "/public/",
   "authors": [
     "jessonfoo <jessonfoo@gmail.com>"
-=======
-  "main": "server/index.js",
-  "authors": [
-    "Amanda Beaudin <amandalbeaudin@gmail.com>"
->>>>>>> Stashed changes
   ],
   "license": "MIT",
   "homepage": "https://github.com/albeaudin/spotifivision",
@@ -19,7 +13,6 @@
     "bower_components",
     "test",
     "tests"
-<<<<<<< Updated upstream
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -27,7 +20,4 @@
     "jquery": "^3.1.0",
     "three.js": "threejs#*"
   }
-=======
-  ]
->>>>>>> Stashed changes
 }
