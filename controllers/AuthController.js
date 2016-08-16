@@ -4,10 +4,6 @@ var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-var client_id = '583cbfe0843a4392ae8af9bbe87acf2b'; // client id
-var client_secret = 'ef3f8e246edf4a16bea4e1297c87f883'; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // redirect uri
-
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
