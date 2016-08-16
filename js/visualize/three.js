@@ -1,5 +1,15 @@
+// File:src/Three.js
+
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+
 var THREE = { REVISION: '79' };
+
+//
+
 if ( typeof define === 'function' && define.amd ) {
+
 	define( 'three', THREE );
 
 } else if ( 'undefined' !== typeof exports && 'undefined' !== typeof module ) {
