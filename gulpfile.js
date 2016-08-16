@@ -41,7 +41,7 @@ gulp.task('css', function() {
 });
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-  gulp.src('bower_components/**/js/*.js')
+  gulp.src(['bower_components/**/js/*.js','bower_components/jQuery/jquery.min.js'])
   .pipe(concat('all.js'))
   .pipe(gulp.dest('dist'))
   .pipe(rename('all.min.js'))
