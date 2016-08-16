@@ -48,15 +48,15 @@ gulp.task('watch', function() {
 });
 
  
-// gulp.task('templates', function() {
-//   var YOUR_LOCALS = {'views': '/views'};
+gulp.task('templates', function() {
+  var YOUR_LOCALS = {'views': '/views'};
  
-//   gulp.src('./lib/*.jade')
-//     .pipe(jade({
-//       locals: YOUR_LOCALS
-//     }))
-//     .pipe(gulp.dest('./dist/'))
-// });
+  gulp.src('./lib/*.jade')
+    .pipe(jade({
+      locals: YOUR_LOCALS
+    }))
+    .pipe(gulp.dest('./dist/'))
+});
 gulp.task('start', function () {
   nodemon({
     script: './bin/www'
@@ -76,4 +76,4 @@ gulp.task('start', function () {
 //     }));
 // });
 // Default Task
-gulp.task('default', ['v-scripts','lint', 'sass', 'scripts', 'watch','start']);
+gulp.task('default', ['lint', 'sass','templates','scripts','v-scripts', 'watch','start']);
