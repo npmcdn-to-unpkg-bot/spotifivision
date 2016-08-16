@@ -4,7 +4,6 @@ var path = require('path');
 // var favicon = require('serve-favicon');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var passport = require('passport');
 
 var request = require('request'); // "Request" library
 var _= require('lodash');
@@ -17,7 +16,19 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
 });
-
+var flickr = new Flickr({
+  api_key:FLICKR_CONSUMER_KEY,
+  progress: false
+});
+var Flickr = require("flickrapi"),
+  flickrOptions = {
+    api_key: FLICKR_CONSUMER_KEY,
+    secret: FLICKR_CONSUMER_SECRET
+  };
+Flickr.tokenOnly(flickrOptions, function(error, flickr){
+  // we can now use "flickr" as our API object,
+  // but we can only call public methods and access public data
+});
 var routes = require('./routes/index');
 // var authRoute= require('./routes/users');
 // var spotAuth= require('./routes/spotify');
