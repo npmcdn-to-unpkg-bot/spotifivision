@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 var db = mongoose.connection;
 // mongoose.connect('mongodb://localhost/spotifivision');
