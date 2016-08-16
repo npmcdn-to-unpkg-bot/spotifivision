@@ -1,5 +1,7 @@
 var express = require('express');
 var querystring = require('querystring');
+var request = require('request')
+
 function generateRandomString(length) {
     var text = '';
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -18,9 +20,9 @@ function login(req, res) {
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',
-            client_id: CLIENT_ID,
+            client_id: process.env.CLIENT_ID,
             scope: scope,
-            redirect_uri: redirect_uri,
+            redirect_uri: process.env.REDIRECT_URI,
             state: state
         }));
 };
@@ -42,11 +44,11 @@ function getCallback(req, res) {
             url: 'https://accounts.spotify.com/api/token',
             form: {
                 code: code,
-                redirect_uri: redirect_uri,
+                redirect_uri: process.env.REDIRECT_URI,
                 grant_type: 'authorization_code'
             },
             headers: {
-                'Authorization': 'Basic ' + (new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'))
+                'Authorization': 'Basic ' + (new Buffer(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64'))
             },
             json: true
         };
@@ -65,22 +67,9 @@ function getCallback(req, res) {
                     json: true
                 };
 
-                // use the access token to access the Spotify Web API
-                request.get(options, function(error, response, body) {
-                    console.log(body);
-                });
-
                 // we can also pass the token to the browser to make requests from there
-                res.redirect('/index' +
-                    querystring.stringify({
-                        access_token: access_token,
-                        refresh_token: refresh_token
-                    }));
-            } else {
-                res.redirect('/index' +
-                    querystring.stringify({
-                        error: 'invalid_token'
-                    }));
+                res.cookie('access_token', access_token)
+                res.redirect('/')
             }
         });
     }
@@ -110,8 +99,6 @@ function refreshToken(req, res, next) {
         }
     });
 };
-
-function destroy(req, res, next) {}
 
 module.exports = {
     login: login,

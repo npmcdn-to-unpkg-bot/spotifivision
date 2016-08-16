@@ -1,9 +1,7 @@
-(function(){
-
-	var context;
+var context;
 var source, sourceJs;
 var analyser;
-var url = '';
+var url = 'data/Alone.m4a';
 var array = new Array();
 var boost = 0;
 
@@ -67,7 +65,7 @@ request.onload = function() {
 
 			$('#info')
 				.fadeOut('normal', function() {
-					$(this).html('<div id="artist"><a class="name" href="https://soundcloud.com/coyotekisses" target="_blank">Coyote Kisses</a><br /><a class="song" href="https://soundcloud.com/coyotekisses/six-shooter" target="_blank">Six shooter</a><br /></div><div><img src="data/coyote_kisses.jpg" width="58" height="58" /></div>');
+					$(this).html('<div id="artist"><a class="name" href="https://soundcloud.com/marshmellomusic" target="_blank">Marshmello</a><br /><a class="song" href="https://soundcloud.com/marshmellomusic/alone" target="_blank">Alone</a><br /></div><div><img src="data/coyote_kisses.jpg" width="58" height="58" /></div>');
 				})
 				.fadeIn();
 
@@ -119,5 +117,4 @@ $(window).resize(function() {
 			$('#play_link').css('left', ($(window).width() / 2 - $('#play_link').width() / 2) + 'px');
 		}
 	}
-});
 });
