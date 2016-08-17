@@ -1,9 +1,7 @@
-(function(){
-
-	var context;
+var context;
 var source, sourceJs;
 var analyser;
-var url = 'data/Alone.m4a';
+// var url = 'data/Alone.m4a';
 var array = new Array();
 var boost = 0;
 
@@ -119,5 +117,4 @@ $(window).resize(function() {
 			$('#play_link').css('left', ($(window).width() / 2 - $('#play_link').width() / 2) + 'px');
 		}
 	}
-});
 });
