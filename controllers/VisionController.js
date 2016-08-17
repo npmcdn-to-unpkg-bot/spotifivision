@@ -3,7 +3,6 @@ var express = require('express');
 
 function get (req, res, next) {
   User.findOne({ _id: req.params.id }, function (err, user) {
-
   })
 }
 
@@ -26,7 +25,7 @@ function update (req, res, next) {
 }
 
 function destroy (req, res, next) {
-  User.findOneAndUpdate({_id: req.params.id}, user, function(err){
+  User.findOneAndDestroy({_id: req.params.id}, user, function(err){
     if (err) console.log(err)
     res.json({ msg: "DELETED!"})
   })

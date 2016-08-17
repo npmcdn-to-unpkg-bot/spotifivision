@@ -37,7 +37,6 @@ mongoose.connect('mongodb://localhost/spotifivision');
 // });
 
 var routes = require('./routes/index');
-
 var app = express();
 
 // uncomment after placing your favicon in /public
@@ -49,6 +48,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'jade');
 app.use('/', routes);
+
+// flickr test route
+
+app.use('/api', routes);
+console.log('Magic happens on port 3000');
+// var FlkPix = require('.//models/pix');
+
 
 
 module.exports = app;

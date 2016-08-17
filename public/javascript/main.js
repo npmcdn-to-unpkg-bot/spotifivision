@@ -34,4 +34,5 @@ $.ajax({
   console.log(playlistIframe);
   $('body').prepend(playlistIframe);
   $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw;height:100vh;position:absolute;}</style>'));
-});
+  console.log(data)
+})
