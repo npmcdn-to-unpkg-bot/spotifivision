@@ -57,7 +57,7 @@ scene.add(directionalLight);
 
 camera.position.z = 50;
 
-controls = new THREE.OrbitControls(camera);
+controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.addEventListener('change', render);
 
 for(var i = 0; i < 7; i++) {

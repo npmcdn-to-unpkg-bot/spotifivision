@@ -26,6 +26,7 @@ router.delete('/test/:id', VisionController.destroy);
 
 // Spotify routes
 router.get('/login', AuthController.login);
+// router.delete('/logout', AuthController.logout);
 router.get('/callback', AuthController.getCallback);
 router.get('/refresh_token', AuthController.refreshToken);
 
