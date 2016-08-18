@@ -6,14 +6,21 @@
     <script type="text/javascript" src="/js/all.min.js"></script>
   </head>
   <body>
-    <% include partials/page/nav %>
-    <div id="app-body" class="container-fluid"></div>
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
-      <script type="text/javascript" src="/visualize/three.min.js"></script>
-      <script type="text/javascript" src="/visualize/orbitControls.js"></script>
-      <script type="text/javascript" src="/visualize/visualizerOne.js"></script>
-      <script type="text/javascript" src="/visualize/audio.js"></script>
-      <script type="text/javascript" src="/javascript/main.js"></script>
+    <% include partials/nav %>
+    <div id="app-body" class="container-fluid no-margin">
+      <div class="row-fluid">
+        <span id="spotify-playlist" class="a-side col-xs-3">
+          
+        </span>
+        <span id="canvas-container" class="content">
+
+        </span>
+      </div>
+
+    
+    </div>
+
+    <% include partials/footer %>
 
   </body>
 </html>
