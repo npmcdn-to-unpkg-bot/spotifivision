@@ -34,8 +34,8 @@ function logout(req, res) {
             Spotify.destroyPlayer(this);
             mPlayer = null;
         }
-        AuthenticationClient.clearCookies(getApplication());
-
+        res.redirect('https://accounts.spotify.com/authorize?');
+        // AuthenticationClient.clearCookies(getApplication());
 }
 
 function getCallback(req, res) {
