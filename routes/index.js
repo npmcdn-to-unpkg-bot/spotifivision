@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 router.use(function(req, res, next){
   console.log('Something is happening with Flickr');
   next();
-  // make sure we go tot he next route and don't stop here
+  // make sure we go to the next route and don't stop here
 });
 
 // CRUD routes
@@ -26,12 +26,13 @@ router.delete('/test/:id', VisionController.destroy);
 
 // Spotify routes
 router.get('/login', AuthController.login);
-// router.delete('/logout', AuthController.logout);
+// router.get('/logout', AuthController.logout);
 router.get('/callback', AuthController.getCallback);
 router.get('/refresh_token', AuthController.refreshToken);
 
 // Flickr routes
 router.get('/api/flickr/', FlickrController.get)
+
   // .get(FlickrController.indexFlickr)
   // method to be placed in ()
 
