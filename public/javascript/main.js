@@ -35,4 +35,9 @@ $.ajax({
   $('#app-body').prepend(playlistIframe);
   $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw;height:100vh;position:absolute;}</style>'));
   console.log(data)
-})
+});
+var query = document.getElementById('searchFlickr').value;
+console.log(query);
+    // query.toLowerCase();
+
+$.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5bfa45a5e0986c04bbf0f3654f987314&format=json&nojsoncallback=1&text=" + value.toString() +"&extras=url_o").done(function(d){alert(d);});
