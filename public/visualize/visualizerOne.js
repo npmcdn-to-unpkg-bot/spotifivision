@@ -4,7 +4,7 @@ var renderer = new THREE.WebGLRenderer();
 var cubes = new Array();
 var controls;
 
-document.body.appendChild(renderer.domElement);
+document.getElementById('app-body').appendChild(renderer.domElement);
 
 var i = 0;
 for(var x = 0; x < 30; x += 2) {

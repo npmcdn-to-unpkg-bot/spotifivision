@@ -9,7 +9,7 @@ var FlickrController = require('../controllers/FlickrController.js');
 
 // Flickr test to make sure everything is working (accessed at GET http://localhost:3000/api)
 router.get('/', function(req, res) {
-  res.json({ message: 'Flickr is working!' });
+  res.render("index", {title: "hello"});
 });
 router.use(function(req, res, next){
   console.log('Something is happening with Flickr');

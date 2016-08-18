@@ -1,94 +1,99 @@
+var audioUrlFn;
+var source, sourceJs
+window.onload = function(e){
 var context;
-var source, sourceJs;
-var analyser;
-// var url = 'data/Alone.m4a';
-var array = new Array();
-var boost = 0;
+audioUrlFn = function audioUrlFn(songSource){
+		var analyser;
+		// var url = 'data/Alone.m4a';
+		var url = songSource;
+		var array = new Array();
+		var boost = 0;
 
-var interval = window.setInterval(function() {
-	if($('#loading_dots').text().length < 3) {
-		$('#loading_dots').text($('#loading_dots').text() + '.');
-	}
-	else {
-		$('#loading_dots').text('');
-	}
-}, 500);
-
-try {
-	if(typeof webkitAudioContext === 'function' || 'webkitAudioContext' in window) {
-		context = new webkitAudioContext();
-	}
-	else {
-		context = new AudioContext();
-	}
-}
-catch(e) {
-	$('#info').text('Web Audio API is not supported in this browser');
-}
-var request = new XMLHttpRequest();
-request.open("GET", url, true);
-request.responseType = "arraybuffer";
-
-request.onload = function() {
-	context.decodeAudioData(
-		request.response,
-		function(buffer) {
-			if(!buffer) {
-				$('#info').text('Error decoding file data');
-				return;
+		var interval = window.setInterval(function() {
+			if($('#loading_dots').text().length < 3) {
+				$('#loading_dots').text($('#loading_dots').text() + '.');
 			}
+			else {
+				$('#loading_dots').text('');
+			}
+		}, 500);
 
-			sourceJs = context.createScriptProcessor(2048, 1, 1);
-			sourceJs.buffer = buffer;
-			sourceJs.connect(context.destination);
-			analyser = context.createAnalyser();
-			analyser.smoothingTimeConstant = 0.6;
-			analyser.fftSize = 512;
-
-			source = context.createBufferSource();
-			source.buffer = buffer;
-			source.loop = true;
-
-			source.connect(analyser);
-			analyser.connect(sourceJs);
-			source.connect(context.destination);
-
-			sourceJs.onaudioprocess = function(e) {
-				array = new Uint8Array(analyser.frequencyBinCount);
-				analyser.getByteFrequencyData(array);
-				boost = 0;
-				for (var i = 0; i < array.length; i++) {
-		            boost += array[i];
-		        }
-		        boost = boost / array.length;
-			};
-
-			$('#info')
-				.fadeOut('normal', function() {
-					$(this).html('<div id="artist"><a class="name" href="https://soundcloud.com/marshmellomusic" target="_blank">Marshmello</a><br /><a class="song" href="https://soundcloud.com/marshmellomusic/alone" target="_blank">Alone</a><br /></div><div><img src="data/coyote_kisses.jpg" width="58" height="58" /></div>');
-				})
-				.fadeIn();
-
-			clearInterval(interval);
-
-			// popup
-			$('body').append($('<div onclick="play();" id="play" style="width: ' + $(window).width() + 'px; height: ' + $(window).height() + 'px;"><div id="play_link"></div></div>'));
-			$('#play_link').css('top', ($(window).height() / 2 - $('#play_link').height() / 2) + 'px');
-			$('#play_link').css('left', ($(window).width() / 2 - $('#play_link').width() / 2) + 'px');
-			$('#play').fadeIn();
-		},
-		function(error) {
-			$('#info').text('Decoding error:' + error);
+		try {
+			if(typeof webkitAudioContext === 'function' || 'webkitAudioContext' in window) {
+				context = new AudioContext();
+			}
+			else {
+				context = new AudioContext();
+			}
 		}
-	);
-};
+		catch(e) {
+			$('#info').text('Web Audio API is not supported in this browser');
+		}
+		var request = new XMLHttpRequest();
+		request.open("GET", url, true);
+		request.responseType = "arraybuffer";
 
-request.onerror = function() {
-	$('#info').text('buffer: XHR error');
-};
+		request.onload = function() {
+			context.decodeAudioData(
+				request.response,
+				function(buffer) {
+					if(!buffer) {
+						$('#info').text('Error decoding file data');
+						return;
+					}
+					// numbers define buffer size below (2048)
+					sourceJs = context.createScriptProcessor(2048, 1, 1);
+					sourceJs.buffer = buffer;
+					sourceJs.connect(context.destination);
+					analyser = context.createAnalyser();
+					analyser.smoothingTimeConstant = 0.6;
+					analyser.fftSize = 512;
+
+					source = context.createBufferSource();
+					source.buffer = buffer;
+					source.loop = true;
+
+					source.connect(analyser);
+					analyser.connect(sourceJs);
+					source.connect(context.destination);
+		// analyser.frequencyBinCount - generally equates to the number of data values you will play with for the visualization
+					sourceJs.onaudioprocess = function(e) {
+						array = new Uint8Array(analyser.frequencyBinCount);
+						analyser.getByteFrequencyData(array);
+						boost = 0;
+						for (var i = 0; i < array.length; i++) {
+				            boost += array[i];
+				        }
+				        boost = boost / array.length;
+					};
+
+					// $('#info')
+					// 	.fadeOut('normal', function() {
+					// 		$(this).html('<div id="artist"><a class="name" href="https://soundcloud.com/marshmellomusic" target="_blank">Marshmello</a><br /><a class="song" href="https://soundcloud.com/marshmellomusic/alone" target="_blank">Alone</a><br /></div><div><img src="data/coyote_kisses.jpg" width="58" height="58" /></div>');
+					// 	})
+					// 	.fadeIn();
+
+					clearInterval(interval);
+
+					// popup
+					$('body').append($('<div onclick="play();" id="play" style="width: ' + $(window).width() + 'px; height: ' + $(window).height() + 'px;"><div id="play_link"></div></div>'));
+					$('#play_link').css('top', ($(window).height() / 2 - $('#play_link').height() / 2) + 'px');
+					$('#play_link').css('left', ($(window).width() / 2 - $('#play_link').width() / 2) + 'px');
+					$('#play').fadeIn();
+				},
+				function(error) {
+					$('#info').text('Decoding error:' + error);
+				}
+			);
+		};
+
+		request.onerror = function() {
+			$('#info').text('buffer: XHR error');
+		};
 
 request.send();
-
+	}
+}
 function displayTime(time) {
 	if(time < 60) {
 		return '0:' + (time < 10 ? '0' + time : time);
