@@ -27,14 +27,10 @@ $.ajax({
   },
   encode: true
 }).then(function (data) {
-  console.log("sliefhseifhsuehf",data)
   var iframeSrc= data["external_urls"].spotify.toString();
-  console.log('line 35 : ' + iframeSrc, data["external_urls"].spotify.toString());
   var  playlistIframe = $('<iframe id="user-playlists" src="' + iframeSrc + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
-  console.log(playlistIframe);
-  $('#app-body').prepend(playlistIframe);
+  $('#spotify-playlist').prepend(playlistIframe);
   $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw;height:100vh;position:absolute;}</style>'));
-  console.log(data)
 });
 var query = document.getElementById('searchFlickr').value;
 console.log(query);

@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/main.css">
-    <script type="text/javascript" src="/js/all.min.js"></script>
-  </head>
-  <body>
-    <% include partials/nav %>
-    <div id="app-body" class="container-fluid no-margin">
-      <div class="row-fluid">
-        <span id="spotify-playlist" class="a-side col-xs-3">
-          
-        </span>
-        <span id="canvas-container" class="content">
-
-        </span>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/main.css">
+  <script type="text/javascript" src="/js/all.min.js"></script>
+</head>
+<body>
+  <% include partials/nav %>
+  <div id="app-body" class="container-fluid no-margin">
+    <div class="row-fluid">
+      <div id="spotify-playlist" class="a-side col-xs-3">
+      </div>
+      <div id="canvas-container" class="content col-xs-9">
+      </div>
       </div>
-
-    
     </div>
+ <% include partials/footer %>
 
-    <% include partials/footer %>
-
-  </body>
+</body>
 </html>
