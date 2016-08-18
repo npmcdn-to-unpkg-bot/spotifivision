@@ -10,7 +10,6 @@ function getAccessToken() {
   return token
 }
 
-
   $.ajax({
     url: 'https://api.spotify.com/v1/me/playlists',
     headers: {
@@ -33,7 +32,7 @@ $.ajax({
   console.log('line 35 : ' + iframeSrc, data["external_urls"].spotify.toString());
   var  playlistIframe = $('<iframe id="user-playlists" src="' + iframeSrc + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
   console.log(playlistIframe);
-  $('body').prepend(playlistIframe);
+  $('#app-body').prepend(playlistIframe);
   $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw;height:100vh;position:absolute;}</style>'));
   console.log(data)
 })
