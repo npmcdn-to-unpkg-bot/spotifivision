@@ -37,6 +37,7 @@ mongoose.connect('mongodb://localhost/spotifivision');
 // });
 
 var routes = require('./routes/index');
+
 var app = express();
 
 // uncomment after placing your favicon in /public

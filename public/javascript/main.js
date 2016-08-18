@@ -28,8 +28,9 @@ $.ajax({
   },
   encode: true
 }).then(function (data) {
+  console.log("sliefhseifhsuehf",data)
   var iframeSrc= data["external_urls"].spotify.toString();
-  // console.log('line 35 : ' + iframeSrc, data["external_urls"].spotify.toString());
+  console.log('line 35 : ' + iframeSrc, data["external_urls"].spotify.toString());
   var  playlistIframe = $('<iframe id="user-playlists" src="' + iframeSrc + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
   console.log(playlistIframe);
   $('body').prepend(playlistIframe);
