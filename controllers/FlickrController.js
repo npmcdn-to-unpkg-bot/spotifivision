@@ -10,17 +10,40 @@ function get(req,res,err){
 
   let flickr = new Flickr(keys);
   flickr.get("photos.search", {"text": req.query.q,"api_key": process.env.FLICKR_API_KEY,"secret":process.env.FLICKR_CLIENT_SECRET}, function(err, result){
+      if (err) return console.error(err);
+      let r = result['photos']['photo'];
+      // use map so we can have an array
+      var count = 0;
+      images= r.map( x=>{ 
+        while(count < 30){
+          count++;
+          return "<div class='jigga'><img src='https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'></div>";
+        }
+      });
+      res.send(images);
+  });
+};
+function getSrc(req,res,err){
+  let keys = {"apikey": process.env.FLICKR_API_KEY};
+
+  let flickr = new Flickr(keys);
+  flickr.get("photos.search", {"text": req.query.q,"api_key": process.env.FLICKR_API_KEY,"secret":process.env.FLICKR_CLIENT_SECRET}, function(err, result){
   // console.log(req.body);
       if (err) return console.error(err);
       let idArray = [];
       let r = result['photos']['photo'];
-      r.map(id=>{idArray.push(id)});
-      images= idArray.map(x=>{ return "<div class='jigga'><img src='https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'></div>";});
-      res.json(images.map(x=>{ return x;}));
+      r.map(id=>{
+          if(idArray.length < 30){
+            idArray.push(id)}
+          }
+        );
+      images= idArray.map(x=>{ return "'https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'";});
+      res.send(images.map(x=>{ return x;}));
   });
 };
 module.exports = {
-  get: get
+  get: get,
+  getSrc: getSrc
   // post: post
   // index: index,
   // create: create,

@@ -3,11 +3,16 @@
   display:none !important;
 
 }
+.no-margins {
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
 </style>
-<div class="container" id="app-nav-container">
-  <nav class="navbar navbar-default">
+<div class="container-fluid no-margins" id="app-nav-container">
+  <nav class="navbar navbar-default no-margins">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
+      <div class="container-fluid no-margins">
+            <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -22,11 +27,22 @@
       <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
       <li id="login"><a href="/login" id="signin" class="sign-link btn btn-defualt">Login</a></li>
       <li id="logout"><a id="signout" class="btn hidden btn-defualt sign-link">Log Out</a></li>
-        <div class="input-group">
+      </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav navbar-left dropdown">
+         <button type="button" class="btn btn-default navbar-toggle collapsed" data-toggle="dropdown-toggle" data-target="#" aria-expanded="false">
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu" id="dropdown-toggle">
+              <li><a href="#">Spotify</a></li>
+              <li><a href="#">Flickr</a></li>
+            </ul>
+          </li>
         <div class="navbar-form navbar-left">
+        <div class="input-group">
        <!--    <form class="navbar-form navbar-left" action="https://api.spotify.com/v1/search" method="get"> -->
           <div class="input-group-btn">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Flickr <span class="caret"></span></button>
             <ul class="dropdown-menu">
               <li><a href="#">Flickr</a></li>
               <li><a href="#">Spotify</a></li>
@@ -37,18 +53,11 @@
           </div><!-- /btn-group -->
           <!-- </form> -->
           </div>
-
-        <li class="nav navbar-right dropdown">
-         <button type="button" class="btn btn-default navbar-toggle collapsed" data-toggle="dropdown-toggle" data-target="#" aria-expanded="false">
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu" id="dropdown-toggle">
-              <li><a href="#">Spotify</a></li>
-              <li><a href="#">Flickr</a></li>
-            </ul>
-          </li>
+          </div>
         </ul>
         </ul>
       </li>
     </ul>
+</div>
   </nav>
 </div>

@@ -36,6 +36,7 @@ router.get('/refresh_token', AuthController.refreshToken);
 // Flickr routes
 // router.get('/api/flickr/', FlickrController.get);
 router.get('/api/flickr', FlickrController.get);
+router.get('/api/flickr/src/', FlickrController.getSrc);
 // router.post('/api/flickr/:query', FlickrController.post);
 
   // .get(FlickrController.indexFlickr)
