@@ -7,10 +7,10 @@ var flickrImage = $('').val();
 document.getElementById('canvas-container').appendChild(renderer.domElement);
 
 var i = 0;
-for(var x = 0; x < 20; x += 2) {
+for(var x = 0; x < 4; x += 2) {
 	var j = 0;
 	cubes[i] = new Array();
-	for(var y = 0; y < 20; y += 2) {
+	for(var y = 0; y < 4; y += 2) {
 		var geometry = new THREE.CubeGeometry(1.5, 1.5, 1.5);
 
 		// var material = new THREE.MeshPhongMaterial({
@@ -55,7 +55,7 @@ directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
 directionalLight.position.set(-1, -1, 0);
 scene.add(directionalLight);
 
-camera.position.z = 30;
+camera.position.z = 40;
 
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.addEventListener('change', render);
@@ -71,7 +71,7 @@ var render = function () {
 		var k = 0;
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
-				var scale = (array[k] / boost) / 30;
+				var scale = (array[k] / boost) / 4;
 				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
 				k += (k < array.length ? 1 : 0);
 			}

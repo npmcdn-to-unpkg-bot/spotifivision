@@ -1,9 +1,11 @@
+
 var flickrSearch, getAccessToken, getUrlFromJson, loadPlaylist, flickrSrcArray;
 /* wait for window to load*/
+SRC_LIST = [];
 getAccessToken = function() {
-  // get all cookies
+    // get all cookies
     let entries = document.cookie.split(';')
-  // let default value of token to false
+        // let default value of token to false
     let token = false
     entries.forEach(function(entry) {
         let pieces = entry.trim().split('=')
@@ -25,42 +27,46 @@ deleteCookieAndPlaylist = function() {
 }
 
 flickrSrcArray = function(q) {
-    /* 
-     make an ajax call to api rest path
-     set query terms as req.query param 
-  */
-    $.ajax({
-        url: '/api/flickr/src/?q=' + q,
-        method: 'get',
-    }).done(function(imgArray) {
-        imgArray.map(img => {
-            $('#columns').prepend(img)
-        });
-    }).then(function() {
-        setTimeout(500);
-    });
+    /* make an ajax call to api rest path
+    set query terms as req.query param */
+    // $.ajax({
+    //     url: '/api/flickr/src/?q=' + 'superbad',
+    //     method: 'get'
+    // }).done(function(imgArray) {
+    //     imgArray.splice(0,30);
+    //     imgArray.forEach((img,i)=> {
+    //         SRC_LIST[parseInt(i)] = img;
+    //     });
+    // });
+$.get('/api/flickr/src/',{q: 'cats'}).done(function(i){
+
+    var ct = 0;
+    i.map(s=>{if ((s != undefined || s != '')&& ct < 30){ ct++;SRC_LIST.push(s)}});
+    SRC_LIST.slice(0,30);
+});
+
 };
 flickrSearch = function(searchTerms) {
     /* ajax call to api rest path set query terms as req.query param */
-    var container= $("<div id='columns'></div>");
+    var container = $("<div id='columns'></div>");
     $.ajax({
-        url:'/api/flickr/?q='+searchTerms,
+        url: '/api/flickr/?q=' + searchTerms,
         method: 'get',
         // setting context allows us to define this
         context: document.getElementById('columns'),
         // dont process the data, just leave it we gotta do shit to it anyway 
         processData: false
-    }).done(function(array){ 
-      let a = array.join('');
-      let el = $("<div id='columns'>"+ a + "</div>");
-      $('#wrapper').prepend(el); 
+    }).done(function(array) {
+        let a = array.join('');
+        let el = $("<div id='columns'>" + a + "</div>");
+        $('#wrapper').prepend(el);
     })
 };
 
 loadPlaylist = function() {
     $.ajax({
         url: 'https://api.spotify.com/v1/me',
-        method:'get',
+        method: 'get',
         headers: {
             'Authorization': 'Bearer ' + getAccessToken()
         }
@@ -68,7 +74,7 @@ loadPlaylist = function() {
         var iframeSrc = data["external_urls"].spotify.toString();
         var playlistIframe = $('<iframe id="user-playlists" src="' + iframeSrc + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
         $('#spotify-playlist').append(playlistIframe);
-        $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw;height:100vh;position:absolute;}</style>'));
+        $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw !important;height:100vh !important;position:absolute;left:0;}</style>'));
         if ($('#spotify-playlist').children().length === 1) {
             $('.sign-link').toggleClass('hidden');
         }
@@ -84,6 +90,7 @@ $(function() {
         // if cookie exists load playlist
         loadPlaylist();
     };
+    flickrSrcArray('superbad');
 
 
     // event listener for signout button 
@@ -108,5 +115,6 @@ $(document).on('keyup', function(e) {
     console.log(e.type, e.which);
     if (!(q == undefined || q == '') && (e.keyCode == 13)) {
         flickrSearch(q);
+        flickrSrcArray(q);
     }
 })

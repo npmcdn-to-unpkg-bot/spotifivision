@@ -1,4 +1,5 @@
 require('dotenv').config();
+var SRC_LIST;
 var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
@@ -11,7 +12,6 @@ var authOptions = require('./config/auth_options');
 var request = require('request'); // "Request" library
 var cookieParser = require('cookie-parser');
 var bodyParser= require('body-parser');
-
 var generateRandomString = function(length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -23,30 +23,13 @@ var generateRandomString = function(length) {
 };
 
 
+
 mongoose.connect('mongodb://localhost/spotifivision');
 
-// var flickr = new Flickr({
-//   api_key: process.env.FLICKR_CONSUMER_KEY,
-//   progress: false
-// });
-// var Flickr = require("flickrapi"),
-//   flickrOptions = {
-//     api_key: process.env.FLICKR_CONSUMER_KEY,
-//     secret: process.env.FLICKR_CONSUMER_SECRET
-//   };
-// Flickr.tokenOnly(flickrOptions, function(error, flickr){
-  // we can now use "flickr" as our API object,
-  // but we can only call public methods and access public data
-// });
-
 var routes = require('./routes/index');
-
 var app = express();
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,11 +39,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-// flickr test route
 
 app.use('/api', routes);
-console.log('Magic happens on port 3000');
-// var FlkPix = require('.//models/pix');
+// console.log('Magic happens on port 3000');
 
 
 

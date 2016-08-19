@@ -30,15 +30,16 @@ function getSrc(req,res,err){
   flickr.get("photos.search", {"text": req.query.q,"api_key": process.env.FLICKR_API_KEY,"secret":process.env.FLICKR_CLIENT_SECRET}, function(err, result){
   // console.log(req.body);
       if (err) return console.error(err);
-      let idArray = [];
-      let r = result['photos']['photo'];
-      r.map(id=>{
-          if(idArray.length < 30){
-            idArray.push(id)}
-          }
-        );
-      images= idArray.map(x=>{ return "https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg";});
-      res.send(images.map(x=>{ return x;}));
+      var s = result['photos']['photo'];
+      var i = [];
+      var count = 0;
+      isrc = s.map( x=>{ 
+        while(count < 30){
+          count++;
+          return "https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg";
+        }
+        });
+      res.send(isrc);
   });
 };
 module.exports = {

@@ -81,7 +81,7 @@ function getCallback(req, res) {
                 };
 
                 // we can also pass the token to the browser to make requests from there
-console.log(body);
+// console.log(body);
                 res.cookie('access_token', access_token)
                 res.redirect('/')
             }

@@ -7,10 +7,10 @@ var flickrImage = $('').val();
 document.getElementById('canvas-container').appendChild(renderer.domElement);
 
 var i = 0;
-for(var x = 0; x < 20; x += 2) {
+for(var x = 0; x < 10; x += 2) {
 	var j = 0;
 	cubes[i] = new Array();
-	for(var y = 0; y < 20; y += 2) {
+	for(var y = 0; y < 10; y += 2) {
 		var geometry = new THREE.CubeGeometry(1.5, 1.5, 1.5);
 
 		// var material = new THREE.MeshPhongMaterial({
@@ -39,30 +39,30 @@ var light = new THREE.AmbientLight(0x505050);
 scene.add(light);
 
 var directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(0, 1, 1);
+directionalLight.position.set(0, 0.2, 0.2);
 scene.add(directionalLight);
 
 directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(1, 1, 0);
+directionalLight.position.set(0.2, 0.2, 0);
 scene.add(directionalLight);
 
 
 directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(0, -1, -1);
+directionalLight.position.set(0, -0.2, -0.2);
 scene.add(directionalLight);
 
 directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
-directionalLight.position.set(-1, -1, 0);
+directionalLight.position.set(-0.2, -0.2, 0);
 scene.add(directionalLight);
 
-camera.position.z = 30;
+camera.position.z = 10;
 
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.addEventListener('change', render);
 
-for(var i = 0; i < 10; i++) {
-	// controls.pan(new THREE.Vector3( (i/10), 0, 0 ));
-	controls.pan(new THREE.Vector3( 1, 1, 1 ));
+for(var i = 0; i < 0.20; i++) {
+	// controls.pan(new THREE.Vector3( (i/0.20), 0, 0 ));
+	controls.pan(new THREE.Vector3( 0, 0.2, 0.2 ));
 }
 
 var render = function () {
@@ -71,9 +71,9 @@ var render = function () {
 		var k = 0;
 		for(var i = 0; i < cubes.length; i++) {
 			for(var j = 0; j < cubes[i].length; j++) {
-				var scale = (array[k] / boost) / 30;
-				cubes[i][j].scale.z = (scale < 1 ? 1 : scale);
-				k += (k < array.length ? 1 : 0);
+				var scale = (array[k] / boost) / 3;
+				cubes[i][j].scale.z = (scale < 0.2 ? 0.2 : scale);
+				k += (k < array.length ? 0.2 : 0);
 			}
 		}
 	}
