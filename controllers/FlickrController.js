@@ -15,7 +15,7 @@ function get(req,res,err){
       let idArray = [];
       let r = result['photos']['photo'];
       r.map(id=>{idArray.push(id)});
-      images= idArray.map(x=>{ return "<img src='https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'>";});
+      images= idArray.map(x=>{ return "<div class='jigga'><img src='https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'></div>";});
       res.json(images.map(x=>{ return x;}));
   });
 };
