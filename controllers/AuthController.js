@@ -26,18 +26,6 @@ function login(req, res) {
             state: state
         }));
 };
-
-function logout(req, res) {
-  res.cookie(stateKey, state);
-  if (stateKey != null) {
-            mLogger.info("Destroy old player.");
-            Spotify.destroyPlayer(this);
-            mPlayer = null;
-        }
-        res.redirect('https://accounts.spotify.com/authorize?');
-        // AuthenticationClient.clearCookies(getApplication());
-}
-
 function getCallback(req, res) {
     stateKey = 'spotify_auth_state';
     var code = req.query.code || null;

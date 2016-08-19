@@ -22,7 +22,7 @@ var generateRandomString = function(length) {
 };
 
 
-mongoose.connect('mongodb://localhost/spotifivision');
+mongoose.connect(process.env.DATABASE_URL);
 
 // var flickr = new Flickr({
 //   api_key: process.env.FLICKR_CONSUMER_KEY,
