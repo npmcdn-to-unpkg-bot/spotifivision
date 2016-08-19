@@ -47,10 +47,9 @@ $(function(e) {
     });
     $('#searchFlickr').on('click',function(e){
       e.preventDefault();
+      var q = $('#query').val();
+      $.get('/api/flickr/',{q: q}).done(function(imgArray){ 
 
-      q = $('#query').val();
-      console.log('yo',q);
-      $.get('/api/flickr/?query='+q).done(function(imgArray){ 
         imgArray.map(img=>{
           $('#img-container').prepend(img);
 

@@ -34,8 +34,9 @@ router.get('/callback', AuthController.getCallback);
 router.get('/refresh_token', AuthController.refreshToken);
 
 // Flickr routes
-router.get('/api/flickr/', FlickrController.get);
-router.get('/api/flickr/:id', FlickrController.get);
+// router.get('/api/flickr/', FlickrController.get);
+router.get('/api/flickr', FlickrController.get);
+// router.post('/api/flickr/:query', FlickrController.post);
 
   // .get(FlickrController.indexFlickr)
   // method to be placed in ()

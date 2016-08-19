@@ -7,6 +7,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div id="img-container" class="container">
+</div>
 <style>
   .hidden{
     display:none;
@@ -15,7 +17,6 @@
 
   <% include partials/nav %>
   <div id="app-body" class="container-fluid no-margin">
-<div id="img-container" class="container">
     <div class="row-fluid">
           <div id="spotify-playlist" class="a-side col-xs-3">
           </div>
@@ -24,7 +25,6 @@
       </div>
     </div>
  <% include partials/footer %>
-</div>
 <script>
     if($('#spotify-playlist').children().length === 1 ){
       $('.sign-link').toggleClass('hidden');

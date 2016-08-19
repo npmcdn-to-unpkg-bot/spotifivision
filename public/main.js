@@ -38,8 +38,8 @@ $.ajax({
   },
   encode: true
 }).then(function (data) {
-  var iframeSrc= data["external_urls"].spotify.toString();
-  var  playlistIframe = $('<iframe id="user-playlists" src="' + iframeSrc + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
+  let iframeSrc= data["external_urls"].spotify.toString();
+  let playlistIframe = $('<iframe id="user-playlists" src="' + iframeSrc + '" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>');
   $('#spotify-playlist').prepend(playlistIframe);
   $('body').prepend($('<style>#user-playlists { height: 100vh; z-index: 0;}canvas{width:100vw;height:100vh;position:absolute;}</style>'));
 });
@@ -49,15 +49,11 @@ $.ajax({
 
 // $.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5bfa45a5e0986c04bbf0f3654f987314&format=json&nojsoncallback=1&text=" + value.toString() +"&extras=url_o").done(function(d){alert(d);});
 
-var flickr = new Flickr({
-  api_key: "1234ABCD1234ABCD1234ABCD1234ABCD"
-});
-$('#searchFlickr').click(function(e){
-  e.preventDefault();
+// $('#searchFlickr').click(function(e){
+//   e.preventDefault();
 
-  var query = $('#tags').value();
-  alert(query);
- $.get('/api/flickr/?tags=dogs').done(function(imgArray){ 
-  imgArray(img=>{$('#img-container').append(img);})
-  });
-});
+//   var query = $('#tags').value();
+//  $.get('/api/flickr/?tags=dogs').done(function(imgArray){ 
+//   imgArray(img=>{$('#img-container').append(img);})
+//   });
+// });

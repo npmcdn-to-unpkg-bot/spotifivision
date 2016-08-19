@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var Flickr = require("node-flickr");
 var Path = require('path');
@@ -5,24 +6,22 @@ var request = require('request');
 
 
 function get(req,res,err){
-  var keys = {"apikey": process.env.FLICKR_API_KEY};
+  let keys = {"apikey": process.env.FLICKR_API_KEY};
 
-  var flickr = new Flickr(req);
-  flickr.get("photos.search", {"tags":req.body.query,"api_key": process.env.FLICKR_API_KEY,"secret":req.body.secret}, function(err, result){
+  let flickr = new Flickr(keys);
+  flickr.get("photos.search", {"text": req.query.q,"api_key": process.env.FLICKR_API_KEY,"secret":process.env.FLICKR_CLIENT_SECRET}, function(err, result){
+  // console.log(req.body);
       if (err) return console.error(err);
-      var r = result['photos']['photo'];
-      var idArray = [];
+      let idArray = [];
+      let r = result['photos']['photo'];
       r.map(id=>{idArray.push(id)});
-      var ownerMap = idArray.map(photo=>{return })
-      console.log(res.id);
       images= idArray.map(x=>{ return "<img src='https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'>";});
-      res.send(images.map(x=>{ return x;}));
+      res.json(images.map(x=>{ return x;}));
   });
-
 };
 module.exports = {
   get: get
-  // show: show
+  // post: post
   // index: index,
   // create: create,
   // update: update,
