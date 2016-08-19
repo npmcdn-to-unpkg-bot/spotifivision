@@ -11,12 +11,15 @@ var FlickrController = require('../controllers/FlickrController.js');
 router.get('/', function(req, res) {
   res.render("index", {title: "hello"});
 });
-router.use(function(req, res, next){
-  console.log('Something is happening with Flickr');
-  next();
-  // make sure we go to the next route and don't stop here
-});
-
+// router.use(
+//   FlickrController.get()
+//
+//   // make sure we go to the next route and don't stop here
+// });
+// router.get('/api/flickr/search/', FlickrController.index);
+// router.get('/api/flickr/:q', FlickrController.get);
+// router.get('/api/flickr/show/:id', FlickrController.show);
+// router.get('/api/flickr/show/', FlickrController.show);
 // CRUD routes
 router.get('/test/:id', VisionController.get);
 router.get('/test/', VisionController.index);
@@ -32,6 +35,7 @@ router.get('/refresh_token', AuthController.refreshToken);
 
 // Flickr routes
 router.get('/api/flickr/', FlickrController.get)
+router.get('/api/flickr/:id', FlickrController.get)
 
   // .get(FlickrController.indexFlickr)
   // method to be placed in ()

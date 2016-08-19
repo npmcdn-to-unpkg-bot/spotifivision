@@ -5,6 +5,7 @@ var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var cleanhtml = require('gulp-cleanhtml');
 var jade = require('gulp-jade');
 var rename = require('gulp-rename');
 var webserver = require('gulp-webserver');
@@ -28,6 +29,11 @@ gulp.task('lint', function() {
   .pipe(jshint.reporter('default'));
 });
 
+gulp.task('default', function(){
+  gulp.src('index.html')
+    .pipe(cleanhtml())
+    .pipe(gulp.dest('build/index.html'));
+});
 // Compile Our Sass
 gulp.task('sass', function() {
   return gulp.src('**/**/scss/*.scss')

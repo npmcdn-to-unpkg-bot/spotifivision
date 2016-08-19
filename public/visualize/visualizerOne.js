@@ -3,7 +3,7 @@ var camera = new THREE.PerspectiveCamera(50, $(window).width() / $(window).heigh
 var renderer = new THREE.WebGLRenderer();
 var cubes = new Array();
 var controls;
-
+var flickrImage = $('').val();
 document.getElementById('canvas-container').appendChild(renderer.domElement);
 
 var i = 0;
@@ -21,12 +21,12 @@ for(var x = 0; x < 30; x += 2) {
 		// 	reflectivity: 5.5
 		// });
 
-		var img = new THREE.MeshBasicMaterial({ //CHANGED to MeshBasicMaterial
+		flickrImage = new THREE.MeshBasicMaterial({ //CHANGED to MeshBasicMaterial
 				map: THREE.ImageUtils.loadTexture('data/Marshmello2.jpg')
 		});
-		img.map.needsUpdate = true; //ADDED
+		flickrImage.map.needsUpdate = true; //ADDED
 
-		cubes[i][j] = new THREE.Mesh(geometry, img);
+		cubes[i][j] = new THREE.Mesh(geometry, flickrImage);
 		cubes[i][j].position = new THREE.Vector3(x, y, 0);
 
 		scene.add(cubes[i][j]);

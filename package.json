@@ -27,6 +27,7 @@
     "mongo": "^0.1.0",
     "mongoose": "^4.5.9",
     "morgan": "^1.7.0",
+    "node-flickr": "^1.0.0",
     "passport": "^0.3.2",
     "passport-openid": "^0.4.0",
     "path": "^0.12.7",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-cleanhtml": "^1.0.1",
     "gulp-concat": "^2.6.0",
     "gulp-concat-vendor": "0.0.4",
     "gulp-jshint": "^2.0.1",

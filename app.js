@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 // var favicon = require('serve-favicon');
 var _ = require('underscore');
+var Flickr = require('flickrapi');
 var ejs = require('ejs');
 var logger = require('morgan');
 var mongoose = require('mongoose');
@@ -22,7 +23,7 @@ var generateRandomString = function(length) {
 };
 
 
-mongoose.connect(process.env.DATABASE_URL);
+mongoose.connect('mongodb://localhost/spotifivision');
 
 // var flickr = new Flickr({
 //   api_key: process.env.FLICKR_CONSUMER_KEY,
@@ -48,7 +49,7 @@ app.set('view engine', 'ejs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
