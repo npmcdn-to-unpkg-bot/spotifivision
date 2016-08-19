@@ -1,0 +1,57 @@
+<style>
+.hidden {
+  display:none !important;
+
+}
+</style>
+<div class="container" id="app-nav-container">
+  <nav class="navbar navbar-default">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+      <li id="login"><a href="/login" id="signin" class="sign-link btn btn-defualt">Login</a></li>
+      <li id="logout"><a id="signout" class="btn hidden btn-defualt sign-link">Log Out</a></li>
+        <div class="input-group">
+        <div class="navbar-form navbar-left">
+       <!--    <form class="navbar-form navbar-left" action="https://api.spotify.com/v1/search" method="get"> -->
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+              <input id="query" type="text" name="q" class="form-control" placeholder="Search">
+            <!-- </div> -->
+            <a id="searchFlickr" class="btn btn-default">Submit</a>
+          </div><!-- /btn-group -->
+          <!-- </form> -->
+          </div>
+
+        <li class="nav navbar-right dropdown">
+         <button type="button" class="btn btn-default navbar-toggle collapsed" data-toggle="dropdown-toggle" data-target="#" aria-expanded="false">
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu" id="dropdown-toggle">
+              <li><a href="#">Spotify</a></li>
+              <li><a href="#">Flickr</a></li>
+            </ul>
+          </li>
+        </ul>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

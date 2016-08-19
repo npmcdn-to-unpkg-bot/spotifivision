@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+<style>
+  .hidden{
+    display:none;
+  }
+  </style>
+  <% include partials/nav %>
+  <div id="app-body" class="container-fluid no-margin">
+    <div class="row-fluid">
+          <div id="spotify-playlist" class="a-side col-xs-3">
+          </div>
+          <div id="canvas-container" class="content col-xs-9">
+          </div>
+      </div>
+    </div>
+ <% include partials/footer %>
+
+<script>
+    if($('#spotify-playlist').children().length === 1 ){
+      $('.sign-link').toggleClass('hidden');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+<% _.each(albums.items function(item){ %>
+    <div style="background-image:url(<%=item.images.0.url %>)" data-album-id="<%=item.id %>" class="result cover"></div>
+<% }); %>
