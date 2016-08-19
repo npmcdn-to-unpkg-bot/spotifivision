@@ -30,15 +30,11 @@ flickrSrcArray = function(q) {
      set query terms as req.query param 
   */
     $.ajax({
-        url: '/api/flickr/',
+        url: '/api/flickr/src/?q=' + q,
         method: 'get',
-        data: {
-            q: searchTerms
-        }
-        /* data => returned as an Array of div's with imgs */
     }).done(function(imgArray) {
         imgArray.map(img => {
-            $('#columns').append(img)
+            $('#columns').prepend(img)
         });
     }).then(function() {
         setTimeout(500);
@@ -48,9 +44,8 @@ flickrSearch = function(searchTerms) {
     /* ajax call to api rest path set query terms as req.query param */
     var container= $("<div id='columns'></div>");
     $.ajax({
-        url:'/api/flickr/',
+        url:'/api/flickr/?q='+searchTerms,
         method: 'get',
-        data: { q: searchTerms },
         // setting context allows us to define this
         context: document.getElementById('columns'),
         // dont process the data, just leave it we gotta do shit to it anyway 
@@ -58,7 +53,7 @@ flickrSearch = function(searchTerms) {
     }).done(function(array){ 
       let a = array.join('');
       let el = $("<div id='columns'>"+ a + "</div>");
-      $('#wrapper').append(el); 
+      $('#wrapper').prepend(el); 
     })
 };
 
@@ -102,9 +97,9 @@ $('#signout').click(function(e) {
 $('#searchFlickr').on('click', function(e) {
     e.preventDefault();
     // get search input value
-    var query = $('#query').val();
+    var query = $('#query').attr('value');
     // get and apply search results
-    flickrSearch(qeury);
+    flickrSearch(query);
 });
 
 $(document).on('keyup', function(e) {

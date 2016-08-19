@@ -19,7 +19,7 @@ function get(req,res,err){
           count++;
           return "<div class='jigga'><img src='https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'></div>";
         }
-      });
+        });
       res.send(images);
   });
 };
@@ -37,7 +37,7 @@ function getSrc(req,res,err){
             idArray.push(id)}
           }
         );
-      images= idArray.map(x=>{ return "'https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg'";});
+      images= idArray.map(x=>{ return "https://farm"+x.farm+".staticflickr.com/"+x.server+"/"+x.id+"_"+x.secret+".jpg";});
       res.send(images.map(x=>{ return x;}));
   });
 };

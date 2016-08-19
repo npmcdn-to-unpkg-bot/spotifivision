@@ -3,9 +3,9 @@ var camera = new THREE.PerspectiveCamera(50, $(window).width() / $(window).heigh
 var renderer = new THREE.WebGLRenderer();
 var cubes = new Array();
 var controls;
-var flickrImage = $('').val();
+var imgSrcList = flickrSrcArray('super bad');
+// var flickrImage = $('')
 document.getElementById('canvas-container').appendChild(renderer.domElement);
-
 var i = 0;
 for(var x = 0; x < 30; x += 2) {
 	var j = 0;
