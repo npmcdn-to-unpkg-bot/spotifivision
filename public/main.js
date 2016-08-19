@@ -52,12 +52,12 @@ $.ajax({
 var flickr = new Flickr({
   api_key: "1234ABCD1234ABCD1234ABCD1234ABCD"
 });
-$('#searchFlickr').click(function(){
-var q = $('#query').val();
-  flickr.photos.search({
-  text: q
-}, function(err, result) {
-  if(err) { throw new Error(err); }
-  // do something with result
-}
+$('#searchFlickr').click(function(e){
+  e.preventDefault();
+
+  var query = $('#tags').value();
+  alert(query);
+ $.get('/api/flickr/?tags=dogs').done(function(imgArray){ 
+  imgArray(img=>{$('#img-container').append(img);})
+  });
 });

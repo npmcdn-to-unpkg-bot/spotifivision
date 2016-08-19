@@ -50,5 +50,11 @@ $(function(e) {
 
       q = $('#query').val();
       console.log('yo',q);
-      $('.sign-link').toggleClass('hidden');
+      $.get('/api/flickr/?query='+q).done(function(imgArray){ 
+        imgArray.map(img=>{
+          $('#img-container').prepend(img);
+
+        })
+      });
+      // $('.sign-link').toggleClass('hidden');
     });
